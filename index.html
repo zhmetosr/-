@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>NCT Official Website</title>
+            <!-- Tailwind CSS -->
+            <script src="https://cdn.tailwindcss.com"></script>
+            <!-- Font Awesome -->
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+            <!-- 自定义配置 -->
+            <script>
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                primary: '#4ade80', // 绿色主色调
+                                secondary: '#2dd4bf', // 蓝绿色辅助色
+                                dark: '#0f172a', // 深色背景
+                                light: '#f8fafc', // 浅色文本
+                            },
+                            fontFamily: {
+                                sans: ['Inter', 'sans-serif'],
+                            },
+                        }
+                    }
+                }
+            </script>
+            <style type="text/tailwindcss">
+                @layer utilities {
+                    .content-auto {
+                        content-visibility: auto;
+                    }
+                    .text-shadow {
+                        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+                    }
+                    .hover-scale {
+                        transition: transform 0.3s ease;
+                    }
+                    .hover-scale:hover {
+                        transform: scale(1.05);
+                    }
+                    .animate-float {
+                        animation: float 6s ease-in-out infinite;
+                    }
+                    @keyframes float {
+                        0% { transform: translateY(0px); }
+                        50% { transform: translateY(-20px); }
+                        100% { transform: translateY(0px); }
+                    }
+                    .animate-fade-in {
+                        animation: fadeIn 0.8s ease-in-out;
+                    }
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    .bg-gradient-nct {
+                        background: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%);
+                    }
+                }
+            </style>
+        </head>
+        <body class="bg-dark text-light font-sans">
+            <!-- 导航栏 -->
+            <header class="fixed w-full z-50 transition-all duration-300" id="navbar">
+                <div class="bg-dark/80 backdrop-blur-md py-4 px-6 md:px-12">
+                    <div class="container mx-auto flex justify-between items-center">
+                        <a href="#" class="flex items-center">
+                            <img src="https://picsum.photos/200/80" alt="NCT Logo" class="h-12 hover-scale">
+                        </a>
+                        
+                        <!-- 桌面导航 -->
+                        <nav class="hidden md:flex space-x-8">
+                            <a href="#" class="text-light hover:text-primary transition-colors font-medium">HOME</a>
+                            <div class="relative group">
+                                <a href="#" class="text-light hover:text-primary transition-colors font-medium flex items-center">
+                                    ABOUT <i class="fa fa-chevron-down ml-1 text-xs"></i>
+                                </a>
+                                <div class="absolute left-0 mt-2 w-48 bg-dark/90 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right">
+                                    <div class="py-1">
+                                        <a href="nct-u.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT U</a>
+                                        <a href="nct-127.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT 127</a>
+                                        <a href="nct-dream.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT DREAM</a>
+                                        <a href="wayv.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">WAYV</a>
+                                        <a href="nct-dojaejung.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT DOJAEJUNG</a>
+                                        <a href="nct-wish.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT WISH</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative group">
+                                <a href="#" class="text-light hover:text-primary transition-colors font-medium flex items-center">
+                                    PRODUCT <i class="fa fa-chevron-down ml-1 text-xs"></i>
+                                </a>
+                                <div class="absolute left-0 mt-2 w-48 bg-dark/90 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right">
+                                    <div class="py-1">
+                                        <a href="album.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">ALBUM</a>
+                                        <a href="photocard.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">PHOTO CARD</a>
+                                        <a href="fankit.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">FAN KIT</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="news.html" class="text-light hover:text-primary transition-colors font-medium">NEWS</a>
+                            <a href="gallery.html" class="text-light hover:text-primary transition-colors font-medium">GALLERY</a>
+                            <a href="contact.html" class="text-light hover:text-primary transition-colors font-medium">CONTACT</a>
+                        </nav>
+                        
+                        <!-- 移动端菜单按钮 -->
+                        <button class="md:hidden text-light focus:outline-none" id="menuBtn">
+                            <i class="fa fa-bars text-2xl"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 移动端导航菜单 -->
+                <div class="md:hidden bg-dark/95 backdrop-blur-md fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out" id="mobileMenu">
+                    <div class="flex justify-end p-6">
+                        <button class="text-light focus:outline-none" id="closeMenuBtn">
+                            <i class="fa fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    <nav class="flex flex-col items-center space-y-6 mt-12">
+                        <a href="#" class="text-light hover:text-primary transition-colors font-medium text-xl">HOME</a>
+                        <div class="w-full text-center">
+                            <button class="text-light hover:text-primary transition-colors font-medium text-xl flex items-center mx-auto" id="mobileAboutBtn">
+                                ABOUT <i class="fa fa-chevron-down ml-2 text-xs"></i>
+                            </button>
+                            <div class="mt-2 w-full bg-dark/90 rounded-md shadow-lg hidden" id="mobileAboutMenu">
+                                <div class="py-1">
+                                    <a href="nct-u.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT U</a>
+                                    <a href="nct-127.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT 127</a>
+                                    <a href="nct-dream.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT DREAM</a>
+                                    <a href="wayv.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">WAYV</a>
+                                    <a href="nct-dojaejung.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT DOJAEJUNG</a>
+                                    <a href="nct-wish.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT WISH</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full text-center">
+                            <button class="text-light hover:text-primary transition-colors font-medium text-xl flex items-center mx-auto" id="mobileProductBtn">
+                                PRODUCT <i class="fa fa-chevron-down ml-2 text-xs"></i>
+                            </button>
+                            <div class="mt-2 w-full bg-dark/90 rounded-md shadow-lg hidden" id="mobileProductMenu">
+                                <div class="py-1">
+                                    <a href="album.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">ALBUM</a>
+                                    <a href="photocard.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">PHOTO CARD</a>
+                                    <a href="fankit.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">FAN KIT</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="news.html" class="text-light hover:text-primary transition-colors font-medium text-xl">NEWS</a>
+                        <a href="gallery.html" class="text-light hover:text-primary transition-colors font-medium text-xl">GALLERY</a>
+                        <a href="contact.html" class="text-light hover:text-primary transition-colors font-medium text-xl">CONTACT</a>
+                    </nav>
+                </div>
+            </header>
+
+            <!-- 英雄区域 -->
+            <section class="relative h-screen flex items-center justify-center overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <div class="absolute inset-0 bg-gradient-to-b from-dark/40 to-dark z-10"></div>
+                    <img src="https://picsum.photos/id/1033/1920/1080" alt="NCT Group Photo" class="w-full h-full object-cover">
+                </div>
+                <div class="container mx-auto px-6 relative z-20 text-center">
+                    <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold text-light mb-6 animate-fade-in text-shadow">
+                        NCT <span class="text-primary">UNIVERSE</span>
+                    </h1>
+                    <p class="text-[clamp(1rem,3vw,1.5rem)] text-light/90 mb-10 max-w-3xl mx-auto animate-fade-in delay-300 text-shadow">
+                        The Next Generation of K-Pop with Unlimited Potential
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in delay-500">
+                        <a href="#about" class="px-8 py-3 bg-primary hover:bg-primary/90 text-dark font-bold rounded-full transition-all hover:shadow-lg hover:shadow-primary/30 hover-scale">
+                            ABOUT NCT
+                        </a>
+                        <a href="#news" class="px-8 py-3 bg-transparent border-2 border-light hover:border-primary hover:text-primary text-light font-bold rounded-full transition-all hover:shadow-lg hover-scale">
+                            LATEST NEWS
+                        </a>
+                    </div>
+                </div>
+                <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                    <a href="#about" class="text-light/80 hover:text-primary transition-colors">
+                        <i class="fa fa-chevron-down text-2xl"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 关于NCT -->
+            <section id="about" class="py-24 bg-gradient-to-b from-dark to-dark/95">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-light mb-4">ABOUT <span class="text-primary">NCT</span></h2>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-light/70 max-w-3xl mx-auto">NCT (Neo Culture Technology) is a South Korean boy band formed by SM Entertainment. The group is divided into multiple subunits, each with a unique concept and sound.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- NCT U -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://picsum.photos/id/1025/600/400" alt="NCT U" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                                <h3 class="absolute bottom-4 left-4 text-xl font-bold text-light">NCT U</h3>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-light/70 mb-4">NCT U is the flexible unit of NCT, with members changing based on the concept and music. They focus on experimental sounds and unique collaborations.</p>
+                                <a href="nct-u.html" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                                    Learn more <i class="fa fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- NCT 127 -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://picsum.photos/id/1027/600/400" alt="NCT 127" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                                <h3 class="absolute bottom-4 left-4 text-xl font-bold text-light">NCT 127</h3>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-light/70 mb-4">Based in Seoul, NCT 127 combines powerful performances with urban music styles. The name "127" represents the longitude of Seoul.</p>
+                                <a href="nct-127.html" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                                    Learn more <i class="fa fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- NCT DREAM -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://picsum.photos/id/1074/600/400" alt="NCT DREAM" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                                <h3 class="absolute bottom-4 left-4 text-xl font-bold text-light">NCT DREAM</h3>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-light/70 mb-4">NCT DREAM represents youthfulness and energy with a fresh and dynamic concept. Their music is known for its catchy melodies and vibrant performances.</p>
+                                <a href="nct-dream.html" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                                    Learn more <i class="fa fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- WAYV -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://picsum.photos/id/1080/600/400" alt="WAYV" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                                <h3 class="absolute bottom-4 left-4 text-xl font-bold text-light">WAYV</h3>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-light/70 mb-4">WAYV is NCT's Chinese subunit, focusing on the Chinese market. They blend K-Pop elements with Chinese cultural influences in their music.</p>
+                                <a href="wayv.html" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                                    Learn more <i class="fa fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- NCT DOJAEJUNG -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://picsum.photos/id/1070/600/400" alt="NCT DOJAEJUNG" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                                <h3 class="absolute bottom-4 left-4 text-xl font-bold text-light">NCT DOJAEJUNG</h3>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-light/70 mb-4">A special subunit consisting of Taeyong, Doyoung, and Jaehyun. They showcase sophisticated vocals and charismatic performances.</p>
+                                <a href="nct-dojaejung.html" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                                    Learn more <i class="fa fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- NCT WISH -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative h-64 overflow-hidden">
+                                <img src="https://picsum.photos/id/1059/600/400" alt="NCT WISH" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                                <h3 class="absolute bottom-4 left-4 text-xl font-bold text-light">NCT WISH</h3>
+                            </div>
+                            <div class="p-6">
+                                <p class="text-light/70 mb-4">NCT WISH is a special project unit formed for SM's annual Winter SMTOWN albums, featuring various NCT members.</p>
+                                <a href="nct-wish.html" class="inline-flex items-center text-primary hover:text-primary/80 transition-colors">
+                                    Learn more <i class="fa fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 最新专辑 -->
+            <section class="py-24 bg-gradient-to-b from-dark/95 to-dark">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-light mb-4">LATEST <span class="text-primary">ALBUMS</span></h2>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-light/70 max-w-3xl mx-auto">Check out NCT's latest music releases and stay updated with their discography.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- 专辑1 -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative overflow-hidden">
+                                <img src="https://picsum.photos/id/1005/400/400" alt="Album Cover" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                    <button class="bg-dark/80 text-primary p-4 rounded-full">
+                                        <i class="fa fa-play text-xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">Golden Age</h3>
+                                <p class="text-primary mb-3">NCT DREAM</p>
+                                <p class="text-light/70 text-sm mb-4">Released: March 2025</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-light/70 text-sm">$29.99</span>
+                                    <a href="#" class="px-4 py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors text-sm">
+                                        BUY NOW
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 专辑2 -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative overflow-hidden">
+                                <img src="https://picsum.photos/id/1011/400/400" alt="Album Cover" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                    <button class="bg-dark/80 text-primary p-4 rounded-full">
+                                        <i class="fa fa-play text-xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">Sticker</h3>
+                                <p class="text-primary mb-3">NCT 127</p>
+                                <p class="text-light/70 text-sm mb-4">Released: October 2024</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-light/70 text-sm">$27.99</span>
+                                    <a href="#" class="px-4 py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors text-sm">
+                                        BUY NOW
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 专辑3 -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative overflow-hidden">
+                                <img src="https://picsum.photos/id/1012/400/400" alt="Album Cover" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                    <button class="bg-dark/80 text-primary p-4 rounded-full">
+                                        <i class="fa fa-play text-xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">Glitch Mode</h3>
+                                <p class="text-primary mb-3">NCT DREAM</p>
+                                <p class="text-light/70 text-sm mb-4">Released: March 2024</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-light/70 text-sm">$25.99</span>
+                                    <a href="#" class="px-4 py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors text-sm">
+                                        BUY NOW
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 专辑4 -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                            <div class="relative overflow-hidden">
+                                <img src="https://picsum.photos/id/1013/400/400" alt="Album Cover" class="w-full h-auto transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                    <button class="bg-dark/80 text-primary p-4 rounded-full">
+                                        <i class="fa fa-play text-xl"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">Awaken the World</h3>
+                                <p class="text-primary mb-3">WAYV</p>
+                                <p class="text-light/70 text-sm mb-4">Released: January 2024</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-light/70 text-sm">$28.99</span>
+                                    <a href="#" class="px-4 py-2 bg-primary/20 hover:bg-primary/30 text-primary rounded-full transition-colors text-sm">
+                                        BUY NOW
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <a href="album.html" class="inline-flex items-center px-8 py-3 bg-primary hover:bg-primary/90 text-dark font-bold rounded-full transition-all hover:shadow-lg hover:shadow-primary/30 hover-scale">
+                            VIEW ALL ALBUMS <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 最新新闻 -->
+            <section id="news" class="py-24 bg-gradient-to-b from-dark to-dark/95">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-light mb-4">LATEST <span class="text-primary">NEWS</span></h2>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-light/70 max-w-3xl mx-auto">Stay updated with the latest news and announcements from NCT.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- 新闻1 -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale">
+                            <div class="relative h-52 overflow-hidden">
+                                <img src="https://picsum.photos/id/1015/600/400" alt="News Image" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4 bg-primary text-dark text-sm font-bold px-3 py-1 rounded-full">
+                                    CONCERT
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-light mb-3">NCT WORLD TOUR 2025: Beyond the Dream</h3>
+                                <p class="text-light/70 mb-4">NCT announces their world tour with dates across Asia, Europe, and North America.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-light/50 text-sm">May 10, 2025</span>
+                                    <a href="#" class="text-primary hover:text-primary/80 transition-colors text-sm">
+                                        Read more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 新闻2 -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale">
+                            <div class="relative h-52 overflow-hidden">
+                                <img src="https://picsum.photos/id/1016/600/400" alt="News Image" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4 bg-secondary text-dark text-sm font-bold px-3 py-1 rounded-full">
+                                    RELEASE
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-light mb-3">NCT DREAM Releases New Single "Golden Age"</h3>
+                                <p class="text-light/70 mb-4">The new single from NCT DREAM showcases their growth and unique musical style.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-light/50 text-sm">March 15, 2025</span>
+                                    <a href="#" class="text-primary hover:text-primary/80 transition-colors text-sm">
+                                        Read more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 新闻3 -->
+                        <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale">
+                            <div class="relative h-52 overflow-hidden">
+                                <img src="https://picsum.photos/id/1018/600/400" alt="News Image" class="w-full h-full object-cover">
+                                <div class="absolute top-4 left-4 bg-primary/80 text-dark text-sm font-bold px-3 py-1 rounded-full">
+                                    EVENT
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-light mb-3">NCT 127 to Host Special Fan Meeting in Tokyo</h3>
+                                <p class="text-light/70 mb-4">NCT 127 will hold a special fan meeting in Tokyo to celebrate their 5th anniversary in Japan.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-light/50 text-sm">April 20, 2025</span>
+                                    <a href="#" class="text-primary hover:text-primary/80 transition-colors text-sm">
+                                        Read more
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <a href="news.html" class="inline-flex items-center px-8 py-3 bg-transparent border-2 border-primary hover:bg-primary/10 text-primary font-bold rounded-full transition-all hover:shadow-lg hover-scale">
+                            VIEW ALL NEWS <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 巡演日期 -->
+            <section class="py-24 bg-gradient-to-b from-dark/95 to-dark relative overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <div class="absolute inset-0 bg-dark/80 z-10"></div>
+                    <img src="https://picsum.photos/id/1029/1920/1080" alt="Background" class="w-full h-full object-cover">
+                </div>
+                <div class="container mx-auto px-6 relative z-20">
+                    <div class="text-center mb-16">
+                        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-light mb-4">UPCOMING <span class="text-primary">TOURS</span></h2>
+                        <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                        <p class="text-light/70 max-w-3xl mx-auto">Don't miss NCT's exciting performances around the world.</p>
+                    </div>
+                    
+                    <div class="bg-dark/70 backdrop-blur-md rounded-xl p-8 shadow-xl">
+                        <div class="space-y-6">
+                            <!-- 巡演日期1 -->
+                            <div class="flex flex-col md:flex-row items-start md:items-center p-6 border-b border-light/10 last:border-0">
+                                <div class="text-center md:text-left mb-4 md:mb-0 md:mr-8">
+                                    <span class="block text-primary text-3xl font-bold">15</span>
+                                    <span class="block text-light/70">JUN</span>
+                                </div>
+                                <div class="flex-grow mb-4 md:mb-0">
+                                    <h3 class="text-xl font-bold text-light mb-1">NCT WORLD TOUR 2025: Beyond the Dream</h3>
+                                    <p class="text-light/70">Madison Square Garden, New York, USA</p>
+                                </div>
+                                <div class="flex flex-col items-center md:items-end">
+                                    <span class="text-light/70 text-sm mb-2">ON SALE NOW</span>
+                                    <a href="#" class="px-4 py-2 bg-primary hover:bg-primary/90 text-dark font-bold rounded-full transition-all hover-scale text-sm">
+                                        BUY TICKETS
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- 巡演日期2 -->
+                            <div class="flex flex-col md:flex-row items-start md:items-center p-6 border-b border-light/10 last:border-0">
+                                <div class="text-center md:text-left mb-4 md:mb-0 md:mr-8">
+                                    <span class="block text-primary text-3xl font-bold">22</span>
+                                    <span class="block text-light/70">JUN</span>
+                                </div>
+                                <div class="flex-grow mb-4 md:mb-0">
+                                    <h3 class="text-xl font-bold text-light mb-1">NCT WORLD TOUR 2025: Beyond the Dream</h3>
+                                    <p class="text-light/70">Staples Center, Los Angeles, USA</p>
+                                </div>
+                                <div class="flex flex-col items-center md:items-end">
+                                    <span class="text-light/70 text-sm mb-2">ON SALE NOW</span>
+                                    <a href="#" class="px-4 py-2 bg-primary hover:bg-primary/90 text-dark font-bold rounded-full transition-all hover-scale text-sm">
+                                        BUY TICKETS
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- 巡演日期3 -->
+                            <div class="flex flex-col md:flex-row items-start md:items-center p-6 border-b border-light/10 last:border-0">
+                                <div class="text-center md:text-left mb-4 md:mb-0 md:mr-8">
+                                    <span class="block text-primary text-3xl font-bold">05</span>
+                                    <span class="block text-light/70">JUL</span>
+                                </div>
+                                <div class="flex-grow mb-4 md:mb-0">
+                                    <h3 class="text-xl font-bold text-light mb-1">NCT WORLD TOUR 2025: Beyond the Dream</h3>
+                                    <p class="text-light/70">Olympiahalle, Munich, Germany</p>
+                                </div>
+                                <div class="flex flex-col items-center md:items-end">
+                                    <span class="text-light/70 text-sm mb-2">ON SALE JUNE 1</span>
+                                    <a href="#" class="px-4 py-2 bg-light/10 hover:bg-light/20 text-light font-bold rounded-full transition-all hover-scale text-sm">
+                                        JOIN WAITLIST
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- 巡演日期4 -->
+                            <div class="flex flex-col md:flex-row items-start md:items-center p-6">
+                                <div class="text-center md:text-left mb-4 md:mb-0 md:mr-8">
+                                    <span class="block text-primary text-3xl font-bold">18</span>
+                                    <span class="block text-light/70">JUL</span>
+                                </div>
+                                <div class="flex-grow mb-4 md:mb-0">
+                                    <h3 class="text-xl font-bold text-light mb-1">NCT WORLD TOUR 2025: Beyond the Dream</h3>
+                                    <p class="text-light/70">O2 Arena, London, UK</p>
+                                </div>
+                                <div class="flex flex-col items-center md:items-end">
+                                    <span class="text-light/70 text-sm mb-2">ON SALE JUNE 5</span>
+                                    <a href="#" class="px-4 py-2 bg-light/10 hover:bg-light/20 text-light font-bold rounded-full transition-all hover-scale text-sm">
+                                        JOIN WAITLIST
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-10">
+                            <a href="#" class="inline-flex items-center px-8 py-3 bg-primary hover:bg-primary/90 text-dark font-bold rounded-full transition-all hover:shadow-lg hover:shadow-primary/30 hover-scale">
+                                VIEW ALL TOUR DATES <i class="fa fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 粉丝俱乐部 -->
+            <section class="py-24 bg-gradient-to-b from-dark to-dark/95">
+                <div class="container mx-auto px-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-light mb-6">JOIN THE <span class="text-primary">NCTZEN</span> FAMILY</h2>
+                            <p class="text-light/70 mb-8 text-lg">Become a part of the official NCT fan club and get exclusive access to content, merchandise, and special events.</p>
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span class="text-light/80">Early access to concert tickets</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span class="text-light/80">Exclusive fan club merchandise</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span class="text-light/80">Behind-the-scenes content and videos</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span class="text-light/80">Special member-only events</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-check-circle text-primary mt-1 mr-3"></i>
+                                    <span class="text-light/80">Chance to participate in fan meetings</span>
+                                </li>
+                            </ul>
+                            <div class="flex flex-col sm:flex-row gap-4">
+                                <a href="#" class="px-8 py-3 bg-primary hover:bg-primary/90 text-dark font-bold rounded-full transition-all hover:shadow-lg hover:shadow-primary/30 hover-scale">
+                                    JOIN NOW
+                                </a>
+                                <a href="#" class="px-8 py-3 bg-transparent border-2 border-light hover:border-primary hover:text-primary text-light font-bold rounded-full transition-all hover:shadow-lg hover-scale">
+                                    LEARN MORE
+                                </a>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="bg-gradient-nct rounded-2xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                                <div class="bg-dark rounded-xl p-6 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
+                                    <div class="flex items-center mb-6">
+                                        <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mr-4">
+                                            <i class="fa fa-diamond text-primary text-2xl"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-light">Diamond Membership</h3>
+                                            <p class="text-primary">Premium benefits</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-light/70 mb-6">Get the ultimate fan experience with our premium membership tier. Includes all standard benefits plus:</p>
+                                    <ul class="space-y-3 mb-8">
+                                        <li class="flex items-center">
+                                            <i class="fa fa-star text-primary mr-3"></i>
+                                            <span class="text-light/80">VIP concert packages</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fa fa-star text-primary mr-3"></i>
+                                            <span class="text-light/80">Exclusive member-only content</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fa fa-star text-primary mr-3"></i>
+                                            <span class="text-light/80">Early access to new releases</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fa fa-star text-primary mr-3"></i>
+                                            <span class="text-light/80">Personalized fan gifts</span>
+                                        </li>
+                                    </ul>
+                                    <a href="#" class="block text-center px-6 py-3 bg-primary hover:bg-primary/90 text-dark font-bold rounded-full transition-all hover-scale">
+                                        UPGRADE NOW
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/20 rounded-full blur-3xl -z-10"></div>
+                            <div class="absolute -top-6 -left-6 w-32 h-32 bg-secondary/20 rounded-full blur-3xl -z-10"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 订阅区域 -->
+            <section class="py-24 bg-gradient-to-b from-dark/95 to-dark relative overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <div class="absolute inset-0 bg-dark/80 z-10"></div>
+                    <img src="https://picsum.photos/id/1048/1920/1080" alt="Background" class="w-full h-full object-cover">
+                </div>
+                <div class="container mx-auto px-6 relative z-20">
+                    <div class="max-w-3xl mx-auto text-center">
+                        <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-light mb-6">NEVER MISS A <span class="text-primary">THING</span></h2>
+                        <p class="text-light/70 mb-8 text-lg">Subscribe to our newsletter to receive the latest news, updates, and exclusive offers from NCT.</p>
+                        <form class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+                            <input type="email" placeholder="Enter your email address" class="flex-grow px-6 py-3 bg-dark/70 border border-light/20 rounded-full focus:outline-none focus:border-primary text-light">
+                            <button type="submit" class="px-8 py-3 bg-primary hover:bg-primary/90 text-dark font-bold rounded-full transition-all hover:shadow-lg hover:shadow-primary/30 hover-scale whitespace-nowrap">
+                                SUBSCRIBE NOW
+                            </button>
+                        </form>
+                        <p class="text-light/50 mt-4 text-sm">By subscribing, you agree to our Privacy Policy and consent to receive updates from NCT.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="bg-dark/90 border-t border-light/10 py-12">
+                <div class="container mx-auto px-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                        <div>
+                            <a href="#" class="inline-block mb-6">
+                                <img src="https://picsum.photos/200/80" alt="NCT Logo" class="h-12">
+                            </a>
+                            <p class="text-light/70 mb-6">NCT (Neo Culture Technology) is a South Korean boy band formed by SM Entertainment. The group is divided into multiple subunits, each with a unique concept and sound.</p>
+                            <div class="flex space-x-4">
+                                <a href="https://www.instagram.com/nct" target="_blank" class="w-10 h-10 rounded-full bg-light/10 flex items-center justify-center text-light hover:bg-primary hover:text-dark transition-colors">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                                <a href="https://www.twitter.com/nctsmtown" target="_blank" class="w-10 h-10 rounded-full bg-light/10 flex items-center justify-center text-light hover:bg-primary hover:text-dark transition-colors">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                                <a href="https://www.youtube.com/c/SMTOWN" target="_blank" class="w-10 h-10 rounded-full bg-light/10 flex items-center justify-center text-light hover:bg-primary hover:text-dark transition-colors">
+                                    <i class="fa fa-youtube-play"></i>
+                                </a>
+                                <a href="https://www.tiktok.com/@nct" target="_blank" class="w-10 h-10 rounded-full bg-light/10 flex items-center justify-center text-light hover:bg-primary hover:text-dark transition-colors">
+                                    <i class="fa fa-tiktok"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-bold text-light mb-6">Quick Links</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#" class="text-light/70 hover:text-primary transition-colors">Home</a></li>
+                                <li><a href="#about" class="text-light/70 hover:text-primary transition-colors">About</a></li>
+                                <li><a href="#news" class="text-light/70 hover:text-primary transition-colors">News</a></li>
+                                <li><a href="#" class="text-light/70 hover:text-primary transition-colors">Albums</a></li>
+                                <li><a href="#" class="text-light/70 hover:text-primary transition-colors">Tours</a></li>
+                                <li><a href="#" class="text-light/70 hover:text-primary transition-colors">Gallery</a></li>
+                                <li><a href="#" class="text-light/70 hover:text-primary transition-colors">Contact</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-bold text-light mb-6">Subunits</h3>
+                            <ul class="space-y-3">
+                                <li><a href="nct-u.html" class="text-light/70 hover:text-primary transition-colors">NCT U</a></li>
+                                <li><a href="nct-127.html" class="text-light/70 hover:text-primary transition-colors">NCT 127</a></li>
+                                <li><a href="nct-dream.html" class="text-light/70 hover:text-primary transition-colors">NCT DREAM</a></li>
+                                <li><a href="wayv.html" class="text-light/70 hover:text-primary transition-colors">WAYV</a></li>
+                                <li><a href="nct-dojaejung.html" class="text-light/70 hover:text-primary transition-colors">NCT DOJAEJUNG</a></li>
+                                <li><a href="nct-wish.html" class="text-light/70 hover:text-primary transition-colors">NCT WISH</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-lg font-bold text-light mb-6">Contact Us</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fa fa-map-marker text-primary mt-1 mr-3"></i>
+                                    <span class="text-light/70">SM Entertainment Building, 416, Nonhyeon-ro, Gangnam-gu, Seoul, South Korea</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa fa-envelope text-primary mr-3"></i>
+                                    <a href="mailto:contact@nct.com" class="text-light/70 hover:text-primary transition-colors">contact@nct.com</a>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fa fa-phone text-primary mr-3"></i>
+                                    <a href="tel:+82234389000" class="text-light/70 hover:text-primary transition-colors">+82 2 3438 9000</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-light/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                        <p class="text-light/50 text-sm mb-4 md:mb-0">© 2025 NCT Official Website. All rights reserved.</p>
+                        <div class="flex space-x-6">
+                            <a href="#" class="text-light/50 hover:text-primary text-sm transition-colors">Privacy Policy</a>
+                            <a href="#" class="text-light/50 hover:text-primary text-sm transition-colors">Terms of Service</a>
+                            <a href="#" class="text-light/50 hover:text-primary text-sm transition-colors">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+            <!-- 回到顶部按钮 -->
+            <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-dark w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 hover:bg-primary/90 hover-scale">
+                <i class="fa fa-chevron-up"></i>
+            </button>
+
+            <!-- JavaScript -->
+            <script>
+                // 导航栏滚动效果
+                const navbar = document.getElementById('navbar');
+                const backToTopBtn = document.getElementById('backToTop');
+                
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('bg-dark/95', 'shadow-lg');
+                        navbar.classList.remove('bg-dark/80');
+                        backToTopBtn.classList.remove('translate-y-20', 'opacity-0');
+                    } else {
+                        navbar.classList.remove('bg-dark/95', 'shadow-lg');
+                        navbar.classList.add('bg-dark/80');
+                        backToTopBtn.classList.add('translate-y-20', 'opacity-0');
+                    }
+                });
+                
+                // 回到顶部按钮
+                backToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                // 移动端菜单
+                const menuBtn = document.getElementById('menuBtn');
+                const closeMenuBtn = document.getElementById('closeMenuBtn');
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileAboutBtn = document.getElementById('mobileAboutBtn');
+                const mobileAboutMenu = document.getElementById('mobileAboutMenu');
+                const mobileProductBtn = document.getElementById('mobileProductBtn');
+                const mobileProductMenu = document.getElementById('mobileProductMenu');
+                
+                menuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('translate-x-full');
+                });
+                
+                closeMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+                
+                mobileAboutBtn.addEventListener('click', () => {
+                    mobileAboutMenu.classList.toggle('hidden');
+                });
+                
+                mobileProductBtn.addEventListener('click', () => {
+                    mobileProductMenu.classList.toggle('hidden');
+                });
+                
+                // 平滑滚动
+                document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                    anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        
+                        const targetId = this.getAttribute('href');
+                        if (targetId === '#') return;
+                        
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth'
+                            });
+                            
+                            // 关闭移动端菜单
+                            if (!mobileMenu.classList.contains('translate-x-full')) {
+                                mobileMenu.classList.add('translate-x-full');
+                            }
+                        }
+                    });
+                });
+                
+                // 图片懒加载
+                document.addEventListener("DOMContentLoaded", function() {
+                    const lazyImages = [].slice.call(document.querySelectorAll("img"));
+                    
+                    if ("IntersectionObserver" in window) {
+                        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                            entries.forEach(function(entry) {
+                                if (entry.isIntersecting) {
+                                    let lazyImage = entry.target;
+                                    lazyImage.classList.add("fade-in");
+                                    lazyImageObserver.unobserve(lazyImage);
+                                }
+                            });
+                        });
+                        
+                        lazyImages.forEach(function(lazyImage) {
+                            lazyImageObserver.observe(lazyImage);
+                        });
+                    }
+                });
+            </script>
+        </body>
+        </html>
+    

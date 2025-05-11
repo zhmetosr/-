@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCT 127 | NCT Official Website</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <!-- 自定义配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4ade80', // 绿色主色调
+                        secondary: '#2dd4bf', // 蓝绿色辅助色
+                        dark: '#0f172a', // 深色背景
+                        light: '#f8fafc', // 浅色文本
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.05);
+            }
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+                100% { transform: translateY(0px); }
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.8s ease-in-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            .bg-gradient-nct {
+                background: linear-gradient(135deg, #4ade80 0%, #2dd4bf 100%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark text-light font-sans">
+    <!-- 导航栏 -->
+    <header class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="bg-dark/80 backdrop-blur-md py-4 px-6 md:px-12">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="https://picsum.photos/200/80" alt="NCT Logo" class="h-12 hover-scale">
+                </a>
+                <!-- 桌面导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-light hover:text-primary transition-colors font-medium">HOME</a>
+                    <div class="relative group">
+                        <a href="#" class="text-light hover:text-primary transition-colors font-medium flex items-center">
+                            ABOUT <i class="fa fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-dark/90 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right">
+                            <div class="py-1">
+                                <a href="nct-u.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT U</a>
+                                <a href="nct-127.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT 127</a>
+                                <a href="nct-dream.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT DREAM</a>
+                                <a href="wayv.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">WAYV</a>
+                                <a href="nct-dojaejung.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT DOJAEJUNG</a>
+                                <a href="nct-wish.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT WISH</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <a href="#" class="text-light hover:text-primary transition-colors font-medium flex items-center">
+                            PRODUCT <i class="fa fa-chevron-down ml-1 text-xs"></i>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-48 bg-dark/90 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-right">
+                            <div class="py-1">
+                                <a href="album.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">ALBUM</a>
+                                <a href="photocard.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">PHOTO CARD</a>
+                                <a href="fankit.html" class="block px-4 py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">FAN KIT</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="news.html" class="text-light hover:text-primary transition-colors font-medium">NEWS</a>
+                    <a href="gallery.html" class="text-light hover:text-primary transition-colors font-medium">GALLERY</a>
+                    <a href="contact.html" class="text-light hover:text-primary transition-colors font-medium">CONTACT</a>
+                </nav>
+                <!-- 移动端菜单按钮 -->
+                <button class="md:hidden text-light focus:outline-none" id="menuBtn">
+                    <i class="fa fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端导航菜单 -->
+        <div class="md:hidden bg-dark/95 backdrop-blur-md fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out" id="mobileMenu">
+            <div class="flex justify-end p-6">
+                <button class="text-light focus:outline-none" id="closeMenuBtn">
+                    <i class="fa fa-times text-2xl"></i>
+                </button>
+            </div>
+            <nav class="flex flex-col items-center space-y-6 mt-12">
+                <a href="index.html" class="text-light hover:text-primary transition-colors font-medium text-xl">HOME</a>
+                <div class="w-full text-center">
+                    <button class="text-light hover:text-primary transition-colors font-medium text-xl flex items-center mx-auto" id="mobileAboutBtn">
+                        ABOUT <i class="fa fa-chevron-down ml-2 text-xs"></i>
+                    </button>
+                    <div class="mt-2 w-full bg-dark/90 rounded-md shadow-lg hidden" id="mobileAboutMenu">
+                        <div class="py-1">
+                            <a href="nct-u.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT U</a>
+                            <a href="nct-127.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT 127</a>
+                            <a href="nct-dream.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT DREAM</a>
+                            <a href="wayv.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">WAYV</a>
+                            <a href="nct-dojaejung.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT DOJAEJUNG</a>
+                            <a href="nct-wish.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">NCT WISH</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full text-center">
+                    <button class="text-light hover:text-primary transition-colors font-medium text-xl flex items-center mx-auto" id="mobileProductBtn">
+                        PRODUCT <i class="fa fa-chevron-down ml-2 text-xs"></i>
+                    </button>
+                    <div class="mt-2 w-full bg-dark/90 rounded-md shadow-lg hidden" id="mobileProductMenu">
+                        <div class="py-1">
+                            <a href="album.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">ALBUM</a>
+                            <a href="photocard.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">PHOTO CARD</a>
+                            <a href="fankit.html" class="block py-2 text-sm hover:bg-primary/20 hover:text-primary transition-colors">FAN KIT</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="news.html" class="text-light hover:text-primary transition-colors font-medium text-xl">NEWS</a>
+                <a href="gallery.html" class="text-light hover:text-primary transition-colors font-medium text-xl">GALLERY</a>
+                <a href="contact.html" class="text-light hover:text-primary transition-colors font-medium text-xl">CONTACT</a>
+            </nav>
+        </div>
+    </header>
+    <!-- 内容区域 -->
+    <section class="py-24 bg-gradient-to-b from-dark to-dark/95 mt-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-[clamp(1.8rem,5vw,3rem)] font-bold text-light mb-4">NCT 127</h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-light/70 max-w-3xl mx-auto">NCT 127是NCT的首尔固定单元，以强劲的舞台表现和标志性的“127”概念（首尔的经度）为特色，专注于全球音乐市场的拓展。</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://picsum.photos/id/1034/600/400" alt="NCT 127" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-4 text-xl font-bold text-light">Concept</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-light/70 mb-4">首尔代表性：以127°E（首尔经度）为概念核心，强调本土文化与全球视野的结合。</p>
+                    </div>
+                </div>
+                <div class="bg-dark/50 rounded-xl overflow-hidden shadow-lg hover-scale group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://picsum.photos/id/1035/600/400" alt="NCT 127" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark to-transparent"></div>
+                        <h3 class="absolute bottom-4 left-4 text-xl font-bold text-light">Music</h3>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-light/70 mb-4">强力风格：融合K-Pop、Hip-hop和电子音乐，打造充满能量的舞台表演。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 页脚 -->
+    <footer class="bg-dark/90 py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-light/50 text-sm">© 2025 NCT Universe. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        // 移动端菜单交互
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
+        closeMenuBtn.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
+        // 导航栏滚动效果
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-dark/90', 'shadow-lg');
+            } else {
+                navbar.classList.remove('bg-dark/90', 'shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
